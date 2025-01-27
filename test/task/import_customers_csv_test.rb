@@ -13,10 +13,6 @@ class CsvImportUsersTaskTest < ActiveSupport::TestCase
     File.write(@csv_file_path, csv_content)
   end
 
-  def teardown
-    FileUtils.rm_rf(@csv_dir) if File.directory?(@csv_dir)
-  end
-
   def csv_content
     <<~CSV
       first_name,last_name,email,gender,ip_address,company,city,title,website
