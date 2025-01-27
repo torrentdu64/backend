@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   # Validation for first_name last_name
-  validates :first_name, presence: true, length: { minimum: 2, maximum: 50 }
-  validates :last_name, presence: true, length: { minimum: 2, maximum: 50 }
+  # validates :first_name, presence: true, length: { minimum: 2, maximum: 50 }
+  # validates :last_name, presence: true, length: { minimum: 2, maximum: 50 }
 
   # Validation for email
   validates :email, presence: true, 
