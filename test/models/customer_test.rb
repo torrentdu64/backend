@@ -16,9 +16,12 @@ class CustomerTest < ActiveSupport::TestCase
   end
 
   # Test for first_name validations
-  test "first name should be present" do
+  test "first name can be blank or nil" do
     @customer.first_name = ""
-    assert_not @customer.valid?
+    assert @customer.valid?
+
+    @customer.first_name = nil
+    assert @customer.valid?
   end
 
   test "first name should not be too short" do
@@ -32,9 +35,12 @@ class CustomerTest < ActiveSupport::TestCase
   end
 
   # Test for last_name validations
-  test "last name should be present" do
+  test "last name can be blank or nil" do
     @customer.last_name = ""
-    assert_not @customer.valid?
+    assert @customer.valid?
+
+    @customer.last_name = nil
+    assert @customer.valid?
   end
 
   test "last name should not be too short" do
@@ -88,5 +94,62 @@ class CustomerTest < ActiveSupport::TestCase
 
     @customer.ip_address = "192.168.1.1" # Valid
     assert @customer.valid?
+  end
+
+
+  # Test for company length validation
+  test "company should not be too long" do
+    @customer.company = "a" * 51
+    assert_not @customer.valid?
+  end
+
+  # Test for city length validation
+  test "city should not be too long" do
+    @customer.city = "a" * 101
+    assert_not @customer.valid?
+  end
+
+  # Test for title length validation
+  test "title should not be too long" do
+    @customer.title = "a" * 101
+    assert_not @customer.valid?
+  end
+
+  # Test for website validation
+  test "website should be a valid URL if present" do
+    @customer.website = "not-a-url"
+    assert_not @customer.valid?
+
+    @customer.website = "http://example.com"
+    assert @customer.valid?
+
+    @customer.website = "https://example.com"
+    assert @customer.valid?
+
+    @customer.website = ""
+    assert @customer.valid? # Since we allow_blank: true
+  end
+
+  # Test to ensure all mandatory fields are present
+  test "all mandatory fields should be present" do
+    mandatory_fields = [:email, :ip_address]
+
+    mandatory_fields.each do |field|
+      @customer.send("#{field}=", nil)
+      assert_not @customer.valid?, "#{field} should be required"
+      @customer.send("#{field}=", "some_value") # Reset for next test
+    end
+  end
+
+  # Test to ensure optional fields can be blank or nil
+  test "optional fields can be blank or nil" do
+    optional_fields = [:first_name, :last_name, :company, :city, :title, :website]
+
+    optional_fields.each do |field|
+      @customer.send("#{field}=", nil)
+      assert @customer.valid?, "#{field} should not be required"
+      @customer.send("#{field}=", "") # Testing for blank strings as well
+      assert @customer.valid?, "#{field} should allow blank strings"
+    end
   end
 end
