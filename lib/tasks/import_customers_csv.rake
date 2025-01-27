@@ -10,7 +10,7 @@ namespace :csv do
     end
 
     CSV.foreach(file_path, headers: :first_row) do |row|
-      user_data = {
+      customer_data = {
         first_name: row['first_name'],
         last_name: row['last_name'],
         email: row['email'],
@@ -22,13 +22,13 @@ namespace :csv do
         website: row['website']
       }
 
-      if user_data[:email].empty?
-        raise "customer email missing for: #{user_data.inspect} "
+      if customer_data[:email].empty?
+        raise "customer email missing for: #{customer_data.inspect} "
       end
 
      
-      # user = User.find_or_initialize_by(email: user_data[:email])
-      # user.update!(user_data)
+      customer = Customer.find_or_initialize_by(email: customer_data[:email])
+      customer.update!(customer_data)
     end
 
     puts "CSV import complete!"
