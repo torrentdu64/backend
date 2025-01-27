@@ -9,8 +9,14 @@ class CsvImportUsersTaskTest < ActiveSupport::TestCase
     @csv_dir = Rails.root.join('..', 'be-dev-test', 'data') 
     FileUtils.mkdir_p(@csv_dir)
 
-    @csv_file_path = @csv_dir.join('customers.csv')
+    @csv_file_path = @csv_dir.join('customers_test.csv')
     File.write(@csv_file_path, csv_content)
+  end
+
+  def teardown
+    if File.exist?(@csv_file_path)
+      File.delete(@csv_file_path)
+    end
   end
 
   def csv_content
