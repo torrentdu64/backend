@@ -2,6 +2,7 @@ require 'test_helper'
 require 'rake'
 
 class CsvImportUsersTaskTest < ActiveSupport::TestCase
+
   def setup
     Rake.application.rake_require 'tasks/import_customers_csv' 
     Rake::Task.define_task(:environment) 
@@ -11,12 +12,16 @@ class CsvImportUsersTaskTest < ActiveSupport::TestCase
 
     @csv_file_path = @csv_dir.join('customers_test.csv')
     File.write(@csv_file_path, csv_content)
+
+    DatabaseCleaner.start
   end
 
   def teardown
     if File.exist?(@csv_file_path)
       File.delete(@csv_file_path)
     end
+
+    DatabaseCleaner.clean
   end
 
   def csv_content
@@ -28,7 +33,7 @@ class CsvImportUsersTaskTest < ActiveSupport::TestCase
   end
 
   def test_it_imports_users_from_a_csv_file
-    ENV['NAME'] = 'customers.csv'
+    ENV['NAME'] = 'customers_test.csv'
 
     assert_difference 'Customer.count', 2 do
       Rake::Task['csv:import_customers'].invoke
