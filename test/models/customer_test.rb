@@ -3,6 +3,12 @@ require 'test_helper'
 class CustomerTest < ActiveSupport::TestCase
   def setup
     @customer = Customer.new(first_name: "John", last_name: "Doe", email: "john@example.com", ip_address: "192.168.1.1")
+
+    DatabaseCleaner.start
+  end
+
+  def teardown
+    DatabaseCleaner.clean
   end
 
   test "customer should be valid" do
