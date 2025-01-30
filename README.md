@@ -8,8 +8,9 @@ Before you begin, ensure that you have the following installed on your machine:
 - **Ruby**: Check Ruby version:
   ```bash
   ruby -v
-```
-recommendate ruby version **ruby 3.3.5**
+    ```
+
+- Recommendate ruby version **ruby 3.3.5**
 
 Install Ruby using [rbenv](https://github.com/rbenv/rbenv) or[rvm](https://rvm.io/).
 
@@ -40,15 +41,15 @@ run command below:
 Ensure be-dev-test is as the same level as backend and frontend
  
 backend-dev-test
-    │
-    ├── backend
-    │   └── ...      
-    │      
-    ├── be-dev-test
-    |    └── data
-    │         └── customers.csv
-    │   
-    └── frontend
+│
+├── backend
+│   └── ...      
+│      
+├── be-dev-test
+|   └── data
+│       └── customers.csv
+│   
+└── frontend
     
 
 ## Install Backend
