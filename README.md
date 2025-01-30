@@ -12,7 +12,7 @@ Before you begin, ensure that you have the following installed on your machine:
 
 - Recommendate ruby version **ruby 3.3.5**
 
-Install Ruby using [rbenv](https://github.com/rbenv/rbenv) or[rvm](https://rvm.io/).
+Install Ruby using [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/).
 
 - **Rails**: Check Rails version:
 
@@ -38,8 +38,10 @@ run command below:
     git clone https://github.com/torrentdu64/frontend
 ```
 
+### Tree Project
 Ensure be-dev-test is as the same level as backend and frontend
- 
+
+```
 backend-dev-test
 │
 ├── backend
@@ -50,7 +52,7 @@ backend-dev-test
 │       └── customers.csv
 │   
 └── frontend
-    
+```
 
 ## Install Backend
 
